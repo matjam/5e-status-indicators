@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+	<icon name="overlay_save_success" file="graphics/token/success.png" />
+	<icon name="overlay_save_failure" file="graphics/token/failure.png" />
+	<icon name="overlay_save_half" file="graphics/token/half.png" />
+
+	<icon name="overlay_moderate" file="graphics/token/overlay_moderate.png" />
+	<icon name="overlay_heavy" file="graphics/token/overlay_heavy.png" />
+	<icon name="overlay_critical" file="graphics/token/overlay_critical.png" />
+	<icon name="overlay_dead" file="graphics/token/dead.png" />
+</root>
