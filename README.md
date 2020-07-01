@@ -32,7 +32,7 @@ Go to the [Releases page](https://github.com/matjam/5e-status-indicators/release
 
 ## Thanks
 
-* **Kent McCullough** for guidance and for providing an excellent patter for
+* **Kent McCullough** for guidance and for providing an excellent pattern for
   hooking into functions in the Fantasy Grounds 5e and core rulesets.
 * **Styrmir** for 5E Combat Enhancer.
 * **Celestian** for 5E Map Indicator for Death.
