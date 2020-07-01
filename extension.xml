@@ -3,23 +3,27 @@
 <root version="3.0">
   <properties>
     <name>5E - Matjam's Status Indicators</name>
-    <version>1.0</version>
+    <version>1.2</version>
+    <!-- Please see the license.md file included with this distribution for attribution and copyright information. -->
+
+    <!-- Why in Lathander's name are you trying to load order this at 2000?! Because hook reasons-->
   	<loadorder>2000</loadorder>
     <author>matjam</author>
     <description>Show the status of a PC or NPC on the battlemap using graphical icon overlays.</description>
   </properties>
-
-  <announcement text="5E - Matjam's Save Indicators version 1.0" font="emotefont" icon="MatjamsExtension" />
+  <!-- Changed name from Save to Status on version 1.2 dated 7/1/20 -->
+  <announcement text="5E - Matjam's Status Indicators version 1.2 \rUpdates can be found at: https://github.com/matjam/5e-status-indicators/releases" font="emotefont" icon="MatjamsExtension" />
 
   <base>
     <icon name="MatjamsExtension" file="matjam.png"></icon>
 		<includefile source="graphics/graphics_icons.xml" />
 
+    <!-- Options Menu Enable/Disable -->
     <string name="option_header_matjams_status_indicators">Matjam's Status Indicators</string>
     <string name="option_label_MJSI_ENABLED">Save Indicators</string>
     <string name="option_label_MJSI_SPATTER_ENABLED">Blood Spatter</string>
     <string name="option_label_MJSI_SKULLS_ENABLED">Death Skulls</string>
-
+    <!-- include lua scripts -->
     <script name="MatjamsStatusIndicators" file="scripts/status_indicators.lua" />
   </base>
 </root>
