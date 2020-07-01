@@ -133,6 +133,10 @@ function healthStatus(nodeField)
 end
 
 function deleteBitmapWithName(tokenCT, bitmapName)
+    if tokenCT == nil then
+        return
+    end
+
     local statusWidget = tokenCT.findWidget(bitmapName)
     if statusWidget then
         statusWidget.destroy()
@@ -140,7 +144,7 @@ function deleteBitmapWithName(tokenCT, bitmapName)
 end
 
 function applyBitmapToToken(tokenCT, bitmapName, tokenName)
-    if tokenName == nil then
+    if tokenName == nil or tokenCT == nil then
         return
     end
 
