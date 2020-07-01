@@ -32,8 +32,6 @@ local successTokenName = "overlay_save_success"
 local halfTokenName = "overlay_save_half"
 
 local tokenNames = {
-    dying = "overlay_dead",
-    dead = "overlay_dead",
     critical = "overlay_critical",
     heavy = "overlay_heavy",
     moderate = "overlay_moderate"
@@ -67,7 +65,26 @@ function onInit()
         "option_entry_cycler",
         {labels = "option_val_off", values = "off", baselabel = "option_val_on", baseval = "on", default = "on"}
     )
+    OptionsManager.registerOption2(
+        "MJSI_SPATTER_ENABLED",
+        false,
+        "option_header_matjams_status_indicators",
+        "option_label_MJSI_SPATTER_ENABLED",
+        "option_entry_cycler",
+        {labels = "option_val_off", values = "off", baselabel = "option_val_on", baseval = "on", default = "on"}
+    )
+    OptionsManager.registerOption2(
+        "MJSI_SKULLS_ENABLED",
+        false,
+        "option_header_matjams_status_indicators",
+        "option_label_MJSI_SKULLS_ENABLED",
+        "option_entry_cycler",
+        {labels = "option_val_off", values = "off", baselabel = "option_val_on", baseval = "on", default = "on"}
+    )
+
     DB.addHandler("options.MJSI_ENABLED", "onUpdate", updateHealthIndicators)
+    DB.addHandler("options.MJSI_SPATTER_ENABLED", "onUpdate", updateHealthIndicators)
+    DB.addHandler("options.MJSI_SKULLS_ENABLED", "onUpdate", updateHealthIndicators)
 end
 
 function customOnDesktopInit()
@@ -79,8 +96,14 @@ function customOnDesktopInit()
 end
 
 function updateHealthIndicators()
+    -- update the spatter/blood if necessary
     for _, node in pairs(CombatManager.getCombatantNodes()) do
         healthStatus(node.getChild("wounds"))
+    end
+
+    -- kill the save indicators
+    if not OptionsManager.isOption("MJSI_ENABLED", "on") then
+        clearStatusIndicators(saveStatusIndicatorName)
     end
 end
 
@@ -120,16 +143,22 @@ function healthStatus(nodeField)
     deleteBitmapWithName(tokenCT, healthStatusIndicatorName)
     deleteBitmapWithName(tokenCT, deathStatusIndicatorName)
 
-    if OptionsManager.isOption("MJSI_ENABLED", "on") == false then
-        return
+    local healthStatus = string.lower(pStatus)
+    local dead = false
+    if healthStatus == "dead" or healthStatus == "dying" then
+        dead = true
+        healthStatus = "critical"
     end
 
-    if string.lower(pStatus) == "dead" or string.lower(pStatus) == "dying" then
+    if tokenNames[healthStatus] ~= nil and OptionsManager.isOption("MJSI_SPATTER_ENABLED", "on") then
         -- throw a little blood on there
-        applyBitmapToToken(tokenCT, deathStatusIndicatorName, tokenNames["critical"])
+        applyBitmapToToken(tokenCT, healthStatusIndicatorName, tokenNames[healthStatus])
     end
 
-    applyBitmapToToken(tokenCT, healthStatusIndicatorName, tokenNames[string.lower(pStatus)])
+    if dead and OptionsManager.isOption("MJSI_SKULLS_ENABLED", "on") then
+        -- throw on a skull
+        applyBitmapToToken(tokenCT, deathStatusIndicatorName, deadTokenName)
+    end
 end
 
 function deleteBitmapWithName(tokenCT, bitmapName)
@@ -159,14 +188,14 @@ end
 
 -- Every turn, we want to clear any success/fail tokens we have set.
 function turnStart(nodeCT)
-    clearSaveStatusIndicators()
+    clearStatusIndicators(saveStatusIndicatorName)
 end
 
-function clearSaveStatusIndicators()
+function clearStatusIndicators(name)
     for _, node in pairs(CombatManager.getCombatantNodes()) do
         local tokenCT = CombatManager.getTokenFromCT(node)
         if tokenCT then
-            local statusWidget = tokenCT.findWidget(saveStatusIndicatorName)
+            local statusWidget = tokenCT.findWidget(name)
 
             if statusWidget then
                 statusWidget.destroy()

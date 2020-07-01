@@ -16,7 +16,9 @@
 		<includefile source="graphics/graphics_icons.xml" />
 
     <string name="option_header_matjams_status_indicators">Matjam's Status Indicators</string>
-    <string name="option_label_MJSI_ENABLED">Enable Indicators</string>
+    <string name="option_label_MJSI_ENABLED">Save Indicators</string>
+    <string name="option_label_MJSI_SPATTER_ENABLED">Blood Spatter</string>
+    <string name="option_label_MJSI_SKULLS_ENABLED">Death Skulls</string>
 
     <script name="MatjamsStatusIndicators" file="scripts/status_indicators.lua" />
   </base>
