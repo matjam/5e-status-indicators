@@ -15,10 +15,6 @@ It is not intended to fully replace 5E Combat Enhancer; but rather to just give 
 Blood splatter is attached to the character token not rendered to the map. 
 I did not implement layers intentionally.
 
-![Failed Saves](screenshot_1.png)
-
-![Dead and Dying](screenshot_2.png)
-
 ## Motivation
 
 5E Combat Enhancer is complex, and is implemented by basically pulling in and
@@ -29,6 +25,10 @@ I also found the layer functionality confusing and problematic.
 
 So, I intend to implement the features I need that I can't plug with other
 extensions.
+
+## Installation
+
+Go to the [Releases page](https://github.com/matjam/5e-status-indicators/releases) and grab the latest release, and drop it in your Fantasy Grounds `data/extensions` folder.
 
 ## Thanks
 
@@ -46,3 +46,8 @@ some of the patterns that people implemented.
 
 Images are either CC0 or Public Domain, as noted in the license file.
 
+# Screenshots
+
+![Failed Saves](screenshot_1.png)
+
+![Dead and Dying](screenshot_2.png)
